@@ -1,14 +1,23 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasa de cambio</title>
+    <title>Tasa de cambio y productos</title>
+    <link rel="stylesheet" href="../public/css/card.css" />
 </head>
 <body>
     <h1>Tasa de cambio Yuan chino a dólar estadounidense</h1>
     <p><strong>Descripción:</strong> <%= descripcion %></p>
     <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
     <p><strong>Fecha:</strong> <%= fecha %></p>
+
+    <h2>Productos</h2>
+    <ul>
+        <% productos.forEach(function(producto) { %>
+            <li><%= producto.nombre %>: <%= producto.precio %></li>
+        <% }); %>
+    </ul>
 </body>
 </html>

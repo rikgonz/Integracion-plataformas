@@ -29,6 +29,8 @@ app.get("/", async (req, res) => {
         const response = await axios.get(apiUrl);
         const responseData = response.data;
 
+        const productos = await db.getAllProducto();
+
         // Comprobamos si la solicitud fue exitosa
         if (responseData.Codigo === 0 && responseData.Descripcion === "Success") {
             const seriesInfo = responseData.Series;
@@ -37,7 +39,7 @@ app.get("/", async (req, res) => {
             const fecha = seriesInfo.Obs[0].indexDateString;
 
             // Renderizamos la vista index.ejs y pasamos los datos como contexto
-            res.render('index', { descripcion, valorTasaCambio, fecha });
+            res.render('index', { descripcion, valorTasaCambio, fecha, productos });
         } else {
             // Si la solicitud no fue exitosa, manejamos el error
             res.status(500).json({ error: 'Error al obtener datos de la API' });
