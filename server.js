@@ -17,7 +17,8 @@ app.get("/", async (req, res) => {
         const currentDate = new Date();
 
         //Seleccionar Time Series
-        const timeSeries= "F072.CNY.USD.N.O.D"
+        // Dolar a Pesos: "F073.TCO.PRE.Z.D
+        const timeSeries= "F073.TCO.PRE.Z.D"
 
         // Formatear la fecha en el formato necesario (YYYY-MM-DD)
         const formattedDate = currentDate.toISOString().split('T')[0];

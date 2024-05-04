@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,16 +7,31 @@
     <link rel="stylesheet" href="../public/css/card.css" />
 </head>
 <body>
-    <h1>Tasa de cambio Yuan chino a dólar estadounidense</h1>
-    <p><strong>Descripción:</strong> <%= descripcion %></p>
+    <h1><strong>Descripción:</strong> <%= descripcion %></h1>
     <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
     <p><strong>Fecha:</strong> <%= fecha %></p>
 
-    <h2>Productos</h2>
+    <h2>Convertir a Pesos</h2>
+    <input type="number" id="value" placeholder="Ingrese el monto"></input> 
+    <button onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>  
+
+    <p id="resultado"></p>
+
+    <h2>Productos</h2> 
     <ul>
         <% productos.forEach(function(producto) { %>
             <li><%= producto.nombre %>: <%= producto.precio %></li>
         <% }); %>
     </ul>
+
+    <script>
+        async function convertir(valorTasaCambio) {
+            const value = document.getElementById('value').value;
+            const resultado = value * valorTasaCambio;
+            document.getElementById('resultado').innerText = `El resultado de la conversión es: ${resultado.toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}`;
+
+        }
+    </script>
+
 </body>
 </html>
