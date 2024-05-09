@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago exitoso</title>
+    <link rel="stylesheet" href="../public/css/card.css" />
+</head>
+<body>
+    <h1>Pago Procesado Correctamente</h1>
+    <p><strong>Monto pagado:</strong> <%= amount %></p>
+    <p><strong>Número de orden:</strong> <%= buy_order %></p>
+    <p><strong>Código de autorización:</strong> <%= authorization_code %></p>
+    <p><strong>Fecha de transacción:</strong> <%= transaction_date %></p>
+    <p><strong>Tipo de pago:</strong> <%= payment_type_code %></p>
+    <p><strong>Número de cuotas:</strong> <%= installments_number %></p>
+
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

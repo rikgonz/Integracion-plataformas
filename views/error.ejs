@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error de Transacción</title>
+    <link rel="stylesheet" href="../public/css/card.css" />
+</head>
+<body>
+    <h1>Error en el Proceso de Pago</h1>
+    <p>Se ha producido un error al procesar tu transacción. Por favor, intenta nuevamente.</p>
+    <p><strong>Detalles del error:</strong> <%= error %></p>
+    <p><strong>Código de respuesta:</strong> <%= response_code %></p>
+
+    <a href="/">Volver al inicio</a>
+</body>
+</html>

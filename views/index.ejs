@@ -20,7 +20,14 @@
     <h2>Productos</h2> 
     <ul>
         <% productos.forEach(function(producto) { %>
-            <li><%= producto.nombre %>: <%= producto.precio %></li>
+            <li><%= producto.nombre %>: <%= producto.precio %> 
+                <!-- Botón para pagar cada producto -->
+                <form action="/pagar" method="post">
+                    <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
+                    <input type="hidden" name="monto" value="<%= producto.precio %>">
+                    <button type="submit">Pagar</button>
+                </form>
+            </li>
         <% }); %>
     </ul>
 
@@ -29,7 +36,6 @@
             const value = document.getElementById('value').value;
             const resultado = value * valorTasaCambio;
             document.getElementById('resultado').innerText = `El resultado de la conversión es: ${resultado.toLocaleString('es-ES', { style: 'currency', currency: 'USD' })}`;
-
         }
     </script>
 
