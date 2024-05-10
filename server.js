@@ -83,7 +83,10 @@ app.post('/pagar', async (req, res) => {
 // Función para manejar la confirmación de la transacción
 async function handleTransactionCommit(tokenWs, res) {
     if (!tokenWs) {
-        return res.status(400).render('error', { error: "Token no proporcionado o inválido." });
+        return res.status(400).render('error', {
+            error: "Token no proporcionado o inválido.",
+            response_code: 'No disponible' // Asegúrate de que siempre proporcionas un response_code
+        });
     }
     
     try {
@@ -109,14 +112,18 @@ async function handleTransactionCommit(tokenWs, res) {
         } else {
             res.render('error', {
                 error: "La transacción no fue autorizada o ha fallado",
-                response_code: response.response_code
+                response_code: response.response_code // Aquí ya lo estás incluyendo correctamente
             });
         }
     } catch (error) {
         console.error('Error al confirmar la transacción:', error);
-        res.status(500).render('error', { error: 'Error al procesar la transacción' });
+        res.status(500).render('error', {
+            error: 'Error al procesar la transacción',
+            response_code: 'No disponible' // Proporciona un valor por defecto aquí también
+        });
     }
 }
+
 
 // Manejo de retorno de Transbank para método GET
 app.get('/retorno', (req, res) => {

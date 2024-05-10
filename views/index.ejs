@@ -20,7 +20,7 @@
     <h2>Productos</h2> 
     <ul>
         <% productos.forEach(function(producto) { %>
-            <li><%= producto.nombre %>: <%= producto.precio %> 
+            <li><%= producto.nombre %>: <%= producto.precio %> <br> <%= producto.marca %> <br><%= producto.desc %>
                 <!-- Botón para pagar cada producto -->
                 <form action="/pagar" method="post">
                     <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
