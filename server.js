@@ -52,6 +52,8 @@ app.get("/", async (req, res) => {
     }
 });
 
+// LLAMADO PAGAR TRANSBANK
+
 app.post('/pagar', async (req, res) => {
     try {
         const ordenDeCompra = req.body.orden_de_compra; // Dinámico según el formulario
@@ -128,5 +130,47 @@ app.post('/retorno', (req, res) => {
     handleTransactionCommit(tokenWs, res);
 });
 
+
+// Rutas para manejar productos
+app.post("/producto", async (req,res) => {
+    const results = await db.createProducto(req.body);
+    res.status(201).json({ sucess: true });
+});
+
+app.get("/producto", async (req,res) =>{
+    const producto = await db.getAllProducto();
+    res.status(200).json({producto});
+});
+
+app.get("/producto/:id", async (req, res) => {
+    const id = req.params.id;
+    const producto = await db.getProductoById(id);
+    
+    if (producto) {
+        res.status(200).json({ producto });
+    } else {
+        res.status(404).json({ error: "Producto no encontrado" });
+    }
+});
+
+app.patch("/producto/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+        const productoActualizado = await db.updateProducto(id, req.body);
+        res.status(200).json({ id: productoActualizado.id });
+    } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+        res.status(500).json({ error: 'Error al actualizar el producto' });
+    }
+});
+
+app.delete("/producto/:id", async (req, res) => {
+    await db.deleteProducto(req.params.id);
+    res.status(200).json({ sucess: true })
+});
+
+app.get("/test", (req, res) => {
+    res.status(200).json({ sucess: true });
+});
 
 app.listen(1337, () => console.log("El servidor está corriendo en http://localhost:1337'"));
