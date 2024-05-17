@@ -9,13 +9,13 @@ const Options = require('transbank-sdk').Options;
 const IntegrationCommerceCodes = require('transbank-sdk').IntegrationCommerceCodes;
 const Environment = require('transbank-sdk').Environment;
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 const apiKey = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C';
-const commerceCode = '597055555532';
 
 const transbank = new Transbank.Transaction(
     new Options(
