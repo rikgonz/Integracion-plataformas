@@ -57,7 +57,7 @@ p{
 }
 h1{
   color: rgb(197, 24, 24);
-  text-shadow: 0px 0px 3px white;
+  text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.17);
 }
 .canje{
   margin-left: 27%;
