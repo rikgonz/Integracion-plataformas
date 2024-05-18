@@ -38,11 +38,9 @@ app.get("/", async (req, res) => {
 
         if (responseData.Codigo === 0 && responseData.Descripcion === "Success") {
             const seriesInfo = responseData.Series;
-            const descripcion = seriesInfo.descripEsp;
             const valorTasaCambio = seriesInfo.Obs[0].value;
-            const fecha = seriesInfo.Obs[0].indexDateString;
 
-            res.render('index', { descripcion, valorTasaCambio, fecha, productos });
+            res.render('index', { valorTasaCambio, productos });
         } else {
             res.status(500).json({ error: 'Error al obtener datos de la API' });
         }
@@ -85,7 +83,7 @@ async function handleTransactionCommit(tokenWs, res) {
     if (!tokenWs) {
         return res.status(400).render('error', {
             error: "Token no proporcionado o inválido.",
-            response_code: 'No disponible' // Asegúrate de que siempre proporcionas un response_code
+            response_code: 'No disponible' 
         });
     }
     

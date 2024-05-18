@@ -9,7 +9,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Ferretería Constructor</a>
+        <a class="navbar-brand" href="#">FerreMas</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,39 +23,43 @@
         </div>
     </nav>
 
-    <div class="container mt-4">
-        <h1><strong>Descripción:</strong> <%= descripcion %></h1>
-        <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
-        <p><strong>Fecha:</strong> <%= fecha %></p>
-
-        <h2>Convertir a Pesos</h2>
-        <input type="number" id="value" class="form-control" placeholder="Ingrese el monto"> 
-        <button class="btn btn-primary mt-2" onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>  
-        <p id="resultado" class="mt-2"></p>
+    <div class="container cont mt-4">
+        <div class="conversion-section">
+            <h1><strong>Valor del Dolar</h1>
+            <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
+            <div class="col-6" >   
+                <h2>Convertir Dolares a Pesos</h2>
+                <input type="number" id="value" class="form-control" placeholder="Ingrese el monto">
+                <button class="btn btn-primary mt-2" onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>
+                <p id="resultado" class="mt-2 resul"></p>
+            </div> 
+        </div>
         
-        
-        <h2>Productos</h2>
-        <div class="row">
-            <% productos.forEach(function(producto) { %>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img class="card-img-top" src="/img/1203173704_2.jpg" alt="<%= producto.nombre %>">
-                        <div class="card-body">
-                            <h5 class="card-title"><%= producto.nombre %></h5>
-                            <p class="card-text"><%= producto.desc %></p>
-                            <p class="card-text">Marca: <%= producto.marca %></p>
-                            <p class="card-text">Precio: $<%= producto.precio %></p>
-                            <form action="/pagar" method="post">
-                                <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
-                                <input type="hidden" name="monto" value="<%= producto.precio %>">
-                                <button type="submit" class="btn btn-success">Pagar</button>
-                            </form>
+        <div class="mt-4">
+            <h2 style="text-align: center;">Productos</h2>
+            <div class="row">
+                <% productos.forEach(function(producto) { %>
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
+                            <img class="card-img-top" src="<%= producto.img %>" alt="<%= producto.nombre %>">
+                            <div class="card-body">
+                                <h2 class="card-title"><%= producto.nombre %></h2>
+                                <p class="card-text"><%= producto.desc %></p>
+                                <p class="card-text">Marca: <%= producto.marca %></p>
+                                <p class="card-text">Precio: $<%= producto.precio %></p>
+                                <form action="/pagar" method="post">
+                                    <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
+                                    <input type="hidden" name="monto" value="<%= producto.precio %>">
+                                    <button type="submit" class="btn btn-success">Pagar</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <% }); %>
+                <% }); %>
+            </div>
         </div>
     </div>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>

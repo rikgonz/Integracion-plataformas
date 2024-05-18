@@ -1,8 +1,56 @@
-/* Estilos básicos */
+:root {
+  --clr-main: #3c4c64;
+  --clr-font: #000000;
+}
+
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  background-color: var(--clr-main);
+  background-image: url(https://cgce.b-cdn.net/wp-content/uploads/2023/08/herramientasqwe.jpg);
+  background-size: cover;
+  background-repeat: none;
+  height: 100vh;
+  background-attachment: fixed;
+  font-family: "Instrument Sans", sans-serif;
+  font-weight: 500;
+  color: var(--clr-font);
+  text-shadow:0px 0px 1px rgb(104, 104, 104);
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparente negro */
+  padding: 20px;
+  border-radius: 8px; /* Bordes redondeados para mejor estética */
+}
+
+.cont{
+  margin: 0 auto;
+  overflow:auto;
+  justify-content: center;
+  box-shadow: 0 7px 80px rgba(12, 5, 83, 0.17);
+}
+
+.resul{
+  font-size: 20px;
+  border-radius: 10px;
+  background-color: white;
+}
+
+.description {
+  text-align: justify;
+}
+li {
+  text-align: center;
+  list-style: none;
+  padding: 0px 0px 5px 0px;
+  border-bottom: 1px solid #f0f4f3;
+}
+li span {
+  color: #777;
+}
+
+h1{
+  color: rgb(197, 24, 24);
+  text-shadow: 0px 0px 3px rgba(255, 255, 255, 0.17);
 }
 
 /* Barra de navegación */
@@ -18,12 +66,6 @@ body {
   background-color: #022c30; /* Un efecto al pasar el ratón */
 }
 
-/* Estilos para el título principal y subtítulos */
-h1, h2 {
-  color: #92908e; /* Un tono que combina con la barra de navegación */
-}
-
-/* Botones */
 button {
   background-color: #006666; /* Un color verde-azulado para los botones */
   color: white;
@@ -39,12 +81,16 @@ button:hover {
 
 /* Estilos para las tarjetas de productos */
 .card {
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparente blanco */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra para resaltar las tarjetas */
 }
 
 .card:hover {
-  transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+  transform: translateY(-5px); 
+  cursor: pointer;
+  animation-name: hoverTransiton;
+  animation-duration: 0.5s;
 }
 
 .card-img-top {
