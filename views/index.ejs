@@ -11,21 +11,23 @@
 <body>
     <main>
     <h1><strong>Descripción:</strong> <%= descripcion %></h1>
-    <div class="cont flex"><p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %>  <strong>Fecha:</strong> <%= fecha %></p></div>
-        <div class="canje col-3">
+    <div class="container cont"><p><strong>Valor de la tasa de cambio: $</strong> <%= valorTasaCambio %>  <strong>Fecha:</strong> <%= fecha %></p></div>
+        <div class="canje col-6">
     <h2>Convertir a Pesos</h2>
     <input type="number" id="value" placeholder="Ingrese el monto"></input> 
     <button onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>  
-
+    <div class="resul"> 
     <p id="resultado"></p>
+    
+</div> 
 </div>
     <div class="container col-6">
         <h2>Productos</h2> 
     <div class="card">
         <img src="https://http2.mlstatic.com/D_NQ_NP_660833-MLU72732453069_112023-O.webp" alt="taladro precutor Bosch">
-    <ul>
+    
         <% productos.forEach(function(producto) { %>
-            <li><%= producto.nombre %>: <%= producto.precio %> <br> <%= producto.marca %> <br><%= producto.desc %>
+            <li><%= producto.nombre %>: $<%= producto.precio %> <br> <%= producto.marca %> <br><%= producto.desc %>
                 <!-- Botón para pagar cada producto -->
                 <form action="/pagar" method="post">
                     <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
@@ -34,7 +36,7 @@
                 </form>
             </li>
         <% }); %>
-    </ul>
+    
 </div>
 </div>
     <script>
