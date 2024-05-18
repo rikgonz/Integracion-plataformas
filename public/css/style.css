@@ -1,7 +1,24 @@
+:root {
+  --clr-main: #3c4c64;
+  --clr-font: #000000;
+}
 body {
-  background-color: #000000;
+  background-color: var(--clr-main);
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVY6zEHZI0reWccW_SfhUNwY60v8JuQoZHkTFEumAzwA&s);
+  background-size: cover;
+  background-repeat: none;
+  height: 100vh;
+  background-attachment: fixed;
   font-family: "Instrument Sans", sans-serif;
   font-weight: 500;
+  color: var(--clr-font);
+  text-shadow:0px 0px 1px rgb(104, 104, 104);
+}
+.cont{
+  background-color: white;
+  box-shadow: 0 7px 80px rgba(12, 5, 83, 0.17);
+  border-radius: 10px;
+  border: none;
 }
 .card {
   box-shadow: 0 7px 80px rgba(12, 5, 83, 0.17);
@@ -22,9 +39,24 @@ body {
   text-align: justify;
 }
 ul li {
+  text-align: center;
+  list-style: none;
   padding: 0px 0px 5px 0px;
   border-bottom: 1px solid #f0f4f3;
+  
+  
 }
 ul li span {
   color: #777;
 }
+p{
+  margin-left: 8rem; 
+}
+h1{
+  color: rgb(197, 24, 24);
+  text-shadow: 0px 0px 3px white;
+}
+.canje{
+  margin-left: 8rem;
+}
+
