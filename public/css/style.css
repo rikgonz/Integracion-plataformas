@@ -1,30 +1,75 @@
+/* Estilos básicos */
 body {
-  background-color: #000000;
-  font-family: "Instrument Sans", sans-serif;
-  font-weight: 500;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
 }
-.card {
-  box-shadow: 0 7px 80px rgba(12, 5, 83, 0.17);
-  border-radius: 10px;
+
+/* Barra de navegación */
+.navbar {
+  background-color: #004445; /* Un verde oscuro para dar un tono serio y profesional */
+}
+
+.nav-link {
+  color: #fff !important; /* Asegura que los enlaces sean blancos */
+}
+
+.nav-link:hover {
+  background-color: #022c30; /* Un efecto al pasar el ratón */
+}
+
+/* Estilos para el título principal y subtítulos */
+h1, h2 {
+  color: #92908e; /* Un tono que combina con la barra de navegación */
+}
+
+/* Botones */
+button {
+  background-color: #006666; /* Un color verde-azulado para los botones */
+  color: white;
   border: none;
-}
-.card:hover {
+  border-radius: 5px;
+  padding: 10px 20px;
   cursor: pointer;
-  animation-name: hoverTransiton;
-  animation-duration: 0.5s;
 }
-@keyframes hoverTransiton {
-  50% {
-    transform: scale(1.03);
-  }
+
+button:hover {
+  background-color: #004445; /* Un color más oscuro al pasar el ratón */
 }
-.description {
-  text-align: justify;
+
+/* Estilos para las tarjetas de productos */
+.card {
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease-in-out;
 }
-ul li {
-  padding: 0px 0px 5px 0px;
-  border-bottom: 1px solid #f0f4f3;
+
+.card:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
 }
-ul li span {
-  color: #777;
+
+.card-img-top {
+    width: 100%;   /* hace que la imagen ocupe el 100% del ancho de su contenedor */
+    height: 200px; /* altura fija para todas las imágenes */
+    object-fit: cover; /* asegura que la imagen cubra completamente el espacio sin distorsionarse */
+}
+
+
+.card-body {
+  padding: 15px;
+}
+
+/* Estilos para el formulario de conversión */
+#value {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px; /* Ancho fijo para el input */
+}
+
+/* Contenedor principal */
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
 }

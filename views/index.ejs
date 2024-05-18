@@ -1,38 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tasa de cambio y productos</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Ferretería: Tasa de Cambio y Productos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
-
 </head>
 <body>
-    <h1><strong>Descripción:</strong> <%= descripcion %></h1>
-    <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
-    <p><strong>Fecha:</strong> <%= fecha %></p>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Ferretería Constructor</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="#">Inicio</a>
+                <a class="nav-item nav-link" href="#">Productos</a>
+                <a class="nav-item nav-link" href="#">Ofertas</a>
+                <a class="nav-item nav-link" href="#">Contacto</a>
+            </div>
+        </div>
+    </nav>
 
-    <h2>Convertir a Pesos</h2>
-    <input type="number" id="value" placeholder="Ingrese el monto"></input> 
-    <button onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>  
+    <div class="container mt-4">
+        <h1><strong>Descripción:</strong> <%= descripcion %></h1>
+        <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
+        <p><strong>Fecha:</strong> <%= fecha %></p>
 
-    <p id="resultado"></p>
+        <h2>Convertir a Pesos</h2>
+        <input type="number" id="value" class="form-control" placeholder="Ingrese el monto"> 
+        <button class="btn btn-primary mt-2" onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>  
+        <p id="resultado" class="mt-2"></p>
+        
+        
+        <h2>Productos</h2>
+        <div class="row">
+            <% productos.forEach(function(producto) { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="/img/1203173704_2.jpg" alt="<%= producto.nombre %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= producto.nombre %></h5>
+                            <p class="card-text"><%= producto.desc %></p>
+                            <p class="card-text">Marca: <%= producto.marca %></p>
+                            <p class="card-text">Precio: $<%= producto.precio %></p>
+                            <form action="/pagar" method="post">
+                                <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
+                                <input type="hidden" name="monto" value="<%= producto.precio %>">
+                                <button type="submit" class="btn btn-success">Pagar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
 
-    <h2>Productos</h2> 
-    <ul>
-        <% productos.forEach(function(producto) { %>
-            <li><%= producto.nombre %>: <%= producto.precio %> <br> <%= producto.marca %> <br><%= producto.desc %>
-                <!-- Botón para pagar cada producto -->
-                <form action="/pagar" method="post">
-                    <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
-                    <input type="hidden" name="monto" value="<%= producto.precio %>">
-                    <button type="submit">Pagar</button>
-                </form>
-            </li>
-        <% }); %>
-    </ul>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
         async function convertir(valorTasaCambio) {
             const value = document.getElementById('value').value;
@@ -40,10 +65,5 @@
             document.getElementById('resultado').innerText = `El resultado de la conversión es: ${resultado.toLocaleString('es-ES', { style: 'currency', currency: 'CLP' })}`;
         }
     </script>
-
-
-|   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
 </body>
 </html>
