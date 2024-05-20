@@ -1,0 +1,60 @@
+
+INSTRUCCIONES DE LEVANTAMIENTO Y USO DE LA APP
+
+1. Tener instalado o instalar Node.js (link de descarga: https://nodejs.org/en)
+2. Abrir el proyecto
+3. En el cmd del proyecto ejecutar "npm install" para instalar dependencias del proyecto
+4. En el cmd ejecutar "node server.js" para levantar el server y visualizar la pagina
+
+
+INTEGRACION BASE DE DATOS
+
+1. Abrir POSTMAN o aplicacion similiar para ejecutar el crud a la base de datos
+2. Para realizar un GET debe usar este link: http://localhost:1337/producto
+3. Para realizar un POST debe usar este link: http://localhost:1337/producto
+	seleccionar el encabezado "body", seleccionar "raw" y tipo de archivo JSON.
+	luego mandar un archivo como este ejemplo:
+{
+    "id": "DES-12113",
+    "marca": "Stanley",
+    "codigo": "BOS-6790",
+    "nombre": "Destornillador punta cruz",
+    "desc":"herramienta manual para armado y desarmado de tornillos.",
+    "precio": 13090,
+    "img": "https://easycl.vtexassets.com/arquivos/ids/295269/872040.jpg?v=637530131483030000"
+
+}
+
+4. Para realizar un PATCH debe usar el link + el id del producto, ejemplo:
+	"http://localhost:1337/producto/FER-123" y luego mandar el JSON con el dato que se cambiara, por ejemplo: 
+
+{
+    "id": "DES-12113",
+    "marca": "Stanley",
+    "codigo": "BOS-6790",
+    "nombre": "Destornillador AMARILLO",
+    "desc":"herramienta manual para armado y desarmado de tornillos.",
+    "precio": 13090,
+    "img": "https://easycl.vtexassets.com/arquivos/ids/295269/872040.jpg?v=637530131483030000"
+
+}	
+
+5. para realizar un DELETE debe usar el link + el id del producto, ejemplo:
+	"http://localhost:1337/producto/FER-123"
+
+
+INTEGRACION API BANCO CENTRAL
+
+1. Abrir el view de la pagina web e interactuar con el convertidor de moneda, donde este utiliza el tipo de cambio del dia
+
+
+INTEGRACION TRANSBANK
+
+1.  Abrir el view de la pagina web e interactuar con el boton pagar de algun producto
+2. Pedira datos, aqui algunos que puede utilizar:
+
+4051 8856 0044 6623
+
+3. Luego pedira datos del comprador, rut: 11.111.111-1 y clave: 123
+4. Elegir si rechaza o aprueba
+
