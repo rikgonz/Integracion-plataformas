@@ -27,6 +27,17 @@ const transbank = new Transbank.Transaction(
 
 app.get("/", async (req, res) => {
     try {
+        const productos = await db.getAllProducto();
+        res.render('index', { productos });
+    } catch (error) {
+        console.error('Error al obtener los productos:', error);
+        res.status(500).json({ error: 'Error al obtener los productos' });
+    }
+});
+
+app.get("/convertir", async (req, res) => {
+    const monto = req.query.monto;
+    try {
         const currentDate = new Date();
         const timeSeries = "F073.TCO.PRE.Z.D"
         const formattedDate = currentDate.toISOString().split('T')[0];
@@ -34,13 +45,11 @@ app.get("/", async (req, res) => {
         const response = await axios.get(apiUrl);
         const responseData = response.data;
 
-        const productos = await db.getAllProducto();
-
         if (responseData.Codigo === 0 && responseData.Descripcion === "Success") {
             const seriesInfo = responseData.Series;
             const valorTasaCambio = seriesInfo.Obs[0].value;
-
-            res.render('index', { valorTasaCambio, productos });
+            const resultado = monto * valorTasaCambio;
+            res.json({ resultado });
         } else {
             res.status(500).json({ error: 'Error al obtener datos de la API' });
         }

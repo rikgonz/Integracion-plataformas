@@ -23,50 +23,58 @@
         </div>
     </nav>
 
-    <div class="container cont mt-4">
-        <div class="conversion-section">
-            <h1><strong>Valor del Dolar</h1>
-            <p><strong>Valor de la tasa de cambio:</strong> <%= valorTasaCambio %></p>
-            <div class="col-6" >   
-                <h2>Convertir Dolares a Pesos</h2>
-                <input type="number" id="value" class="form-control" placeholder="Ingrese el monto">
-                <button class="btn btn-primary mt-2" onclick="convertir(<%=valorTasaCambio%>)">Convertir</button>
-                <p id="resultado" class="mt-2 resul"></p>
-            </div> 
-        </div>
-        
-        <div class="mt-4">
-            <h2 style="text-align: center;">Productos</h2>
-            <div class="row">
-                <% productos.forEach(function(producto) { %>
-                    <div class="col-md-4 mb-4">
-                        <div class="card">
-                            <img class="card-img-top" src="<%= producto.img %>" alt="<%= producto.nombre %>">
-                            <div class="card-body">
-                                <h2 class="card-title"><%= producto.nombre %></h2>
-                                <p class="card-text"><%= producto.desc %></p>
-                                <p class="card-text">Marca: <%= producto.marca %></p>
-                                <p class="card-text">Precio: $<%= producto.precio %></p>
-                                <form action="/pagar" method="post">
-                                    <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
-                                    <input type="hidden" name="monto" value="<%= producto.precio %>">
-                                    <button type="submit" class="btn btn-success">Pagar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                <% }); %>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Convertir Dólares a Pesos</h1>
+                <input type="number" id="value" class="form-control" placeholder="Ingrese el monto en dólares">
+                <button class="btn btn-primary mt-2" onclick="convertir()">Convertir</button>
+                <p id="resultado" class="mt-2"></p>
             </div>
         </div>
+
+        <h2 class="mt-4 text-center">Productos</h2>
+        <div class="row">
+            <% productos.forEach(function(producto) { %>
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img class="card-img-top" src="<%= producto.img %>" alt="<%= producto.nombre %>">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= producto.nombre %></h5>
+                            <p class="card-text"><%= producto.desc %></p>
+                            <p class="card-text">Marca: <%= producto.marca %></p>
+                            <p class="card-text">Precio: $<%= producto.precio %></p>
+                            <form action="/pagar" method="post">
+                                <input type="hidden" name="orden_de_compra" value="<%= producto.id %>">
+                                <input type="hidden" name="monto" value="<%= producto.precio %>">
+                                <button type="submit" class="btn btn-success">Pagar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
     </div>
-    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-        async function convertir(valorTasaCambio) {
+        async function convertir() {
             const value = document.getElementById('value').value;
-            const resultado = value * valorTasaCambio;
-            document.getElementById('resultado').innerText = `El resultado de la conversión es: ${resultado.toLocaleString('es-ES', { style: 'currency', currency: 'CLP' })}`;
+            if (!value) {
+                document.getElementById('resultado').innerText = 'Por favor ingrese un monto para convertir.';
+                return;
+            }
+            try {
+                const response = await fetch(`/convertir?monto=${value}`);
+                const data = await response.json();
+                if (response.ok) {
+                    document.getElementById('resultado').innerText = `El resultado de la conversión es: ${data.resultado.toLocaleString('es-ES', { style: 'currency', currency: 'CLP' })}`;
+                } else {
+                    throw new Error('Failed to fetch');
+                }
+            } catch (error) {
+                document.getElementById('resultado').innerText = 'Error al realizar la conversión.';
+            }
         }
     </script>
 </body>
