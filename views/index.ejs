@@ -64,6 +64,21 @@
                 document.getElementById('resultado').innerText = 'Por favor ingrese un monto para convertir.';
                 return;
             }
+
+            // Validaciones en el cliente
+            if (isNaN(value)) {
+                document.getElementById('resultado').innerText = 'El monto debe ser un número válido.';
+                return;
+            }
+            if (value < 0) {
+                document.getElementById('resultado').innerText = 'El monto no puede ser negativo.';
+                return;
+            }
+            if (value > 1000000) {
+                document.getElementById('resultado').innerText = 'El monto es demasiado alto para convertir.';
+                return;
+            }
+
             try {
                 const response = await fetch(`/convertir?monto=${value}`);
                 const data = await response.json();

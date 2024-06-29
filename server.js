@@ -37,9 +37,21 @@ app.get("/", async (req, res) => {
 
 app.get("/convertir", async (req, res) => {
     const monto = req.query.monto;
+    
+    // Validaciones del monto
+    if (isNaN(monto)) {
+        return res.status(400).json({ error: 'El monto debe ser un número válido' });
+    }
+    if (monto < 0) {
+        return res.status(400).json({ error: 'El monto no puede ser negativo' });
+    }
+    if (monto > 1000000) {
+        return res.status(400).json({ error: 'El monto es demasiado alto para convertir' });
+    }
+
     try {
         const currentDate = new Date();
-        const timeSeries = "F073.TCO.PRE.Z.D"
+        const timeSeries = "F073.TCO.PRE.Z.D";
         const formattedDate = currentDate.toISOString().split('T')[0];
         const apiUrl = `https://si3.bcentral.cl/SieteRestWS/SieteRestWS.ashx?user=ric.gonzalezf@duocuc.cl&pass=9598Vaba&timeseries=${timeSeries}&firstdate=${formattedDate}`;
         const response = await axios.get(apiUrl);
@@ -58,6 +70,7 @@ app.get("/convertir", async (req, res) => {
         res.status(500).json({ error: 'Error al obtener datos de la API' });
     }
 });
+
 
 // LLAMADO PAGAR TRANSBANK
 
